@@ -1,0 +1,248 @@
+# Time Series Wrangling
+
+## Creating Frequency Columns
+
+Install the required packages using the following commands. If you are using RStudio IDE type the commands on the Terminal according to the following format
+
+```         
+$ python -m pip install pandas
+$ python -m pip install plotnine
+```
+
+Otherwise, you can use the following format
+
+```         
+import sys
+
+!{sys.executable} -m pip install [package_name]
+```
+
+```         
+```
+
+Similarly install and load the following libraries
+
+```{python}
+import pandas as pd
+from pandas import *
+import numpy as np
+import plotnine as p9
+from plotnine import *
+import seaborn as sns
+import matplotlib.pyplot as plt
+import datetime
+from datetime import *
+```
+
+### Annual Data
+
+First , I create a simple pandas data frame.
+
+```{python}
+# Creating a pandas DataFrame
+data = {'Year': list(range(2015, 2020)),
+        'Observation': [123, 39, 78, 52, 110]}
+df = pd.DataFrame(data)
+df
+
+
+```
+
+Now, let's check the data types of the variables in the above data frame.
+
+```{python}
+df.info()
+
+
+```
+
+```{python}
+(ggplot(df, aes("Year", "Observation"))
+ + geom_point() + geom_line())
+```
+
+```         
+```
+
+```{python}
+df['Year'] = pd.to_datetime(df['Year'], format='%Y')
+df.info()
+
+
+```
+
+```{python}
+(ggplot(df, aes("Year", "Observation"))
+ + geom_point() + geom_line() + 
+   scale_x_datetime(breaks='1 year',  date_labels='%Y'))
+```
+
+```         
+```
+
+### Quarterly
+
+```{python}
+start_date = '2015-01-01'
+end_date = '2020-12-31'
+
+quarterly_dates = pd.date_range(start=start_date, end=end_date, freq='Q')
+print("Quarterly Dates:")
+print(quarterly_dates)
+```
+
+```         
+```
+
+```         
+```
+
+```         
+```
+
+```         
+```
+
+```         
+```
+
+### Monthly data
+
+Example
+
+```{python}
+# Generate a date range for the desired time period
+date_range = pd.date_range(start='2020-01-01', end='2021-12-31', freq='M')
+monthly_observation_df = pd.DataFrame()
+# Add the date range and a randomly generated 'Observation' column
+monthly_observation_df['Month'] = date_range
+np.random.seed(42)  # Setting seed for reproducibility
+monthly_observation_df['Observation'] = np.random.randint(24, 150, size=len(date_range))
+
+# Displaying the resulting DataFrame
+print("Monthly Observation DataFrame:")
+print(monthly_observation_df)
+monthly_observation_df.info()
+
+
+
+```
+
+```{python}
+plot = (ggplot(monthly_observation_df, aes(x='Month', y='Observation')) +
+        geom_line() +
+        labs(title='Line Plot of Observation Over Time'))
+
+print(plot)
+```
+
+```{python}
+plot = (ggplot(monthly_observation_df, aes(x='Month', y='Observation')) +
+        geom_line() +
+        geom_point() +
+        labs(title='Line Plot of Observation Over Time') + 
+        scale_x_datetime(breaks='1 month',  date_labels='%b %Y') + 
+        theme(axis_text_x=element_text(angle=90, hjust=1)))
+
+print(plot)
+
+
+```
+
+```{python}
+plot = (ggplot(monthly_observation_df, aes(x='Month', y='Observation')) +
+        geom_line() +
+        geom_point() +
+        labs(title='Line Plot of Observation Over Time') + 
+        scale_x_datetime(breaks='1 month',  date_labels='%Y-%m-%d') + 
+        theme(axis_text_x=element_text(angle=90, hjust=1)))
+
+print(plot)
+```
+
+```{python}
+plot = (ggplot(monthly_observation_df, aes(x='Month', y='Observation')) +
+        geom_line() +
+        geom_point() +
+        labs(title='Line Plot of Observation Over Time') + 
+        scale_x_datetime(breaks='1 month',  date_labels='%m %Y') + 
+        theme(axis_text_x=element_text(angle=90, hjust=1)))
+
+print(plot)
+```
+
+```         
+```
+
+-   **`%Y`**: Year with century as a decimal number (e.g., 2023).
+
+-   **`%m`**: Month as a zero-padded decimal number (e.g., 01 for January).
+
+-   **`%d`**: Day of the month as a zero-padded decimal number (e.g., 07).
+
+```         
+```
+
+```{python}
+date_range = pd.date_range(start='2019-01-01', end='2019-05-31', freq='M')
+df_monthly = pd.DataFrame()
+# Add the date range as a 'Month' column
+df_monthly['Month'] = date_range
+df_monthly['Observation'] = [50, 23, 34, 30, 25]
+
+# Display the resulting DataFrame
+print("Monthly DataFrame:")
+print(df_monthly)
+df_monthly.info()
+plot = (ggplot(df_monthly, aes(x='Month', y='Observation')) +
+        geom_line() +
+       labs(title='Line Plot of Observation Over Time') + 
+       scale_x_datetime(breaks='1 month'))
+print(plot)
+
+
+```
+
+### Weekly
+
+```{python}
+start_date = '2015-01-01'
+end_date = '2020-12-31'
+
+weekly_dates = pd.date_range(start=start_date, end=end_date, freq='W')
+print("Weekly Dates:")
+print(weekly_dates)
+```
+
+```         
+```
+
+### Hourly
+
+```{python}
+start_date = '2015-01-01 00:00:00'
+end_date = '2015-01-01 23:59:59'
+
+hourly_dates = pd.date_range(start=start_date, end=end_date, freq='H')
+print("Hourly Dates:")
+print(hourly_dates)
+
+```
+
+`{## Derive variables from the time column}`
+
+```         
+```
+
+```         
+```
+
+```         
+```
+
+``` python
+
+```
+
+```         
+```

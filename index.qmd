@@ -1,0 +1,14 @@
+# Preface {.unnumbered}
+
+This lab manual has beenwritten to serve as your companion in learning and mastering the time series analysis, spatial analysis and Spatio-temporal analysis with Python.
+
+This book is written based on Quarto using the RStudio IDE. The content is reproducible. To reproduce the work use the following steps
+
+1.  Install R and RStudio
+
+2.  Install Python
+
+3.  Install jupyter using commander
+
+    ```{py -m pip install jupyter`}
+    ```
