@@ -5,10 +5,13 @@ project:
 book:
   title: "Lab Manual: DSA 554 3.0 Spatio-temporal Data Analysis"
   author: "Thiyanga S. Talagala"
-  date: "12/29/2023"
+  date: "Last updated 06/01/2024"
   chapters:
     - index.qmd
     - intro.qmd
+    - chap2.qmd
+    - chap3.qmd
+    - chap4.qmd
     - summary.qmd
     - references.qmd
 

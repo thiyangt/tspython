@@ -1,0 +1,55 @@
+# Time Series Graphics
+
+```{python}
+import pandas as pd
+from pandas import *
+import numpy as np
+import plotnine as p9
+from plotnine import *
+import seaborn as sns
+import matplotlib.pyplot as plt
+import datetime
+from datetime import *
+```
+
+## Task 1
+
+1. Get data from tsibbledata package in R and write it as a csv file
+
+Following is an R code.
+
+```r
+#install.packages("tsibbledata")
+library(tsibbledata)
+library(tidyverse)
+data(olympic_running)
+write_csv(olympic_running, file="data/olympic_running.csv")
+```
+
+
+2. Read data
+
+```{python}
+olympic_running = pd.read_csv('data/olympic_running.csv', parse_dates=['Year'])
+olympic_running
+```
+
+Task: Visualise data in a meaningful way.
+
+
+## Task 2
+
+Obtain `vic_elec` data from the `tsibbledata` package in R and visualize.
+
+
+Help
+
+```{python}
+import pandas as pd
+vic_elec = pd.read_csv('data/vic_elec.csv', parse_dates=['Time'])
+vic_elec
+```
+
+```{python}
+vic_elec.info()
+```

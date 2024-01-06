@@ -1,0 +1,94 @@
+# Import data, Subsetting data based on dates, Down sampling and Upsampling
+
+```{python}
+import pandas as pd
+from pandas import *
+import numpy as np
+import plotnine as p9
+from plotnine import *
+import seaborn as sns
+import matplotlib.pyplot as plt
+import datetime
+from datetime import *
+```
+
+## Import CSV with dates
+
+```{python}
+airpassenger = pd.read_csv('data/AirPassengers.csv', parse_dates=["Month"])
+airpassenger
+print(airpassenger.info())
+```
+
+```{python}
+ggplot(airpassenger, aes(x='Month', y='#Passengers'))+geom_line()
+```
+
+```{python}
+print(airpassenger['Month'].min())
+```
+
+## Subseting
+
+```{python}
+print(airpassenger.iloc[-6:, :6])
+```
+
+```{python}
+print(airpassenger.iloc[:6])
+```
+
+## Subsetting based on Date Components
+
+```{python}
+print(airpassenger.loc[(airpassenger.Month.dt.year == 1949) & (airpassenger.Month.dt.month == 8)])
+```
+
+```{python}
+print(airpassenger.loc[(airpassenger.Month.dt.year == 1949) & (airpassenger.Month.dt.month > 8)])
+```
+
+```{python}
+print(airpassenger.loc[(airpassenger.Month.dt.year == 1949)])
+```
+
+## DatetimeIndex: pandas time series index by time
+
+When working with datetime data, it is often required to set the datetime object to be the index of the dataframe.
+
+```{python}
+airpassenger.index = airpassenger['Month']
+print(airpassenger.index)
+```
+
+```{python}
+airpassenger
+```
+
+Now we can directly subset rows using date components.
+
+```{python}
+print(airpassenger.loc['1949'])
+```
+
+```{python}
+print(airpassenger.loc['1949-06'])
+```
+
+## Downsampling
+
+Downsampling monthly values to yearly values
+
+```{python}
+down = airpassenger.resample('Y').mean()
+down
+```
+
+## Upsampling
+
+Upsample monthly values to daily values
+
+```{python}
+up = airpassenger.resample('D').mean()
+up
+```
