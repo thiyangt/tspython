@@ -1,0 +1,102 @@
+# Spatial Visualization
+
+```{python}
+import geopandas as gpd
+import geodatasets
+
+```
+
+## Vector files
+
+1. Shapefiles
+
+- .shp file contains shape geometry
+
+- .dbf file holds attributes for each geometry
+
+- .shx file or shape index file helps link the attributes to the shapes
+
+2. GeoJSON: Unlike shapefiles, GeoJSON is a single file
+
+
+```{python}
+chicago = gpd.read_file(geodatasets.get_path("geoda.chicago_commpop"))
+chicago
+chicago.crs
+```
+
+```{python}
+groceries = gpd.read_file(geodatasets.get_path("geoda.groceries"))
+groceries
+```
+
+
+```{python}
+chicago.plot();
+```
+
+```{python}
+chicago.plot(column="POP2010", legend=True);
+```
+
+```{python}
+chicago.boundary.plot();
+```
+
+## Centroid
+
+Centroid: center point of a geometry.
+
+```{python}
+chicago['centroid']=chicago.centroid
+chicago
+```
+
+## Area
+
+```{python}
+chicago['area'] = chicago.area
+chicago
+```
+
+## Boundary
+
+```{python}
+chicago['boundary']=chicago.boundary
+chicago
+```
+
+## Add points
+
+```{python}
+groceries.plot(marker='*', color='green', markersize=5);
+```
+
+```{python}
+groceries = groceries.to_crs(chicago.crs)
+```
+
+```{python}
+base = chicago.plot(color='white', edgecolor='black')
+base
+```
+
+```{python}
+base = chicago.plot(color='white', edgecolor='black')
+groceries.plot(ax=base, marker='o', color='red', markersize=3);
+```
+
+## Reading external data
+
+```{python}
+url = 'https://raw.githubusercontent.com/jcanalesluna/bcn-geodata/master/districtes/districtes.geojson'
+districts = gpd.read_file(url)
+districts
+districts.crs
+```
+
+```{python}
+districts.plot();
+```
+
+
