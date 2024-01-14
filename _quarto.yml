@@ -15,9 +15,7 @@ book:
     - chap5.qmd
     - chap6.qmd
     - chap7.qmd
-    - summary.qmd
     - references.qmd
-
 bibliography: references.bib
 
 format:
